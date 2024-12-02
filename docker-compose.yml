@@ -18,7 +18,7 @@ services:
     volumes:
       - mysql-data_pagamento:/var/lib/mysql
     networks:
-      - backend_pagamento
+      - backend
 
 # Setup app container
   app_pagamento:
@@ -38,10 +38,13 @@ services:
       DB_USER: ${MYSQL_USER}
       DB_PASSWORD: ${MYSQL_PASSWORD}
       DB_NAME: ${MYSQL_DATABASE}
+      URL_CLIENTES: ${URL_CLIENTES}
+      URL_PRODUTOS: ${URL_PRODUTOS}
     networks:
-      - backend_pagamento
+      - backend
 
 volumes:
   mysql-data_pagamento:
 networks:
-  backend_pagamento:
+  backend:
+    external: true

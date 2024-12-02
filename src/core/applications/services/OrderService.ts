@@ -4,8 +4,8 @@ import { IOrderProduct } from '../../domain/OrderProduct';
 import { IRepository } from '../ports/repositories/IRepository';
 import { IOrderService } from '../ports/services/IOrderService';
 
-const URL_CLIENTES = 'http://localhost:3000/customers/'
-const URL_PRODUTOS = 'http://localhost:3000/products/'
+
+
 
 export class OrderService implements IOrderService {
   private orderRepository: IRepository<IOrder>;
@@ -18,9 +18,6 @@ export class OrderService implements IOrderService {
 
   public async create(orderData: Partial<IOrder>, productsData: Partial<IOrderProduct>[]): Promise<IOrder> {
     const { id, ...restOrderData } = orderData;
- 
-
-
 
     const order = await this.orderRepository.create(restOrderData);
     const orderProducts = productsData.map((product) => ({
