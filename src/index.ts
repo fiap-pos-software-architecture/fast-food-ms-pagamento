@@ -5,10 +5,10 @@ import * as logger from 'morgan';
 import 'reflect-metadata';
 import swaggerUi from 'swagger-ui-express';
 import swaggerDocument from '../dist/swagger.json';
-import customerRoute from './adapters/driver/api/routers/customerRoute';
+// import customerRoute from './adapters/driver/api/routers/customerRoute';
 import orderRoute from './adapters/driver/api/routers/orderRoute';
 import { paymentRoute } from './adapters/driver/api/routers/paymentRoute';
-import productRoute from './adapters/driver/api/routers/productRoute';
+// import productRoute from './adapters/driver/api/routers/productRoute';
 import { AppDataSource } from './data-source';
 
 const app = express();
@@ -18,7 +18,8 @@ AppDataSource.initialize()
     app.use(cors.default());
     app.use(bodyParser.json());
     app.use(logger.default('dev'));
-    app.use(express.json(), customerRoute, productRoute, paymentRoute, orderRoute);
+    // app.use(express.json(), customerRoute, productRoute, paymentRoute, orderRoute);
+    app.use(express.json(), paymentRoute, orderRoute);
 
     app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 

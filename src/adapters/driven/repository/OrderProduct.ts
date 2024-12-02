@@ -1,7 +1,7 @@
 import { BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn, Relation } from 'typeorm';
 import { IOrderProduct } from '../../../core/domain/OrderProduct';
 import { Order } from './Order';
-import { Product } from './Product';
+// import { Product } from './Product';
 
 @Entity()
 export class OrderProduct extends BaseEntity implements IOrderProduct {
@@ -15,8 +15,8 @@ export class OrderProduct extends BaseEntity implements IOrderProduct {
 
   @Column()
   productId: number;
-  @ManyToOne(() => Product, (Product) => Product.OrderProducts, { eager: true })
-  product: Relation<Product>;
+  // @ManyToOne(() => Product, (Product) => Product.OrderProducts, { eager: true })
+  // product: Relation<Product>;
 
   @Column('int')
   quantity: number;

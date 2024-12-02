@@ -10,7 +10,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { IOrder, PAYMENT_STATUS, PROCESS_STATUS } from '../../../core/domain/Order';
-import { Customer } from './Customer';
+// import { Customer } from './Customer';
 import { OrderProduct } from './OrderProduct';
 
 @Entity()
@@ -23,8 +23,8 @@ export class Order extends BaseEntity implements IOrder {
 
   @Column({ nullable: true })
   customerId: number;
-  @ManyToOne(() => Customer, (Customer) => Customer.orders)
-  customer: Relation<Customer>;
+  // @ManyToOne(() => Customer, (Customer) => Customer.orders)
+  // customer: Relation<Customer>;
 
   @Column({
     type: 'enum',

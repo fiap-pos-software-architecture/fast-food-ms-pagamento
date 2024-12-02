@@ -12,12 +12,12 @@ COPY . .
 
 RUN npm run build
 
-ENV MYSQL_USER=jm_user \
-    MYSQL_PASSWORD=jm_password \
-    MYSQL_DATABASE=tech_challenge_BD \
-    MYSQL_HOST=mysql-db \
+ENV MYSQL_USER=jm_user_pagamento \
+    MYSQL_PASSWORD=jm_password_pagamento \
+    MYSQL_DATABASE=tech_challenge_BD_pagamento \
+    MYSQL_HOST=mysql-db-pagamento \
     MYSQL_PORT=3306
 
-EXPOSE 3000
+EXPOSE 3001
 
 CMD [ "npm", "start" ]
