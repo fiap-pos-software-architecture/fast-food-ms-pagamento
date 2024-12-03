@@ -1,0 +1,8 @@
+# TypeScript REST API
+.DS_Store
+node_modules
+.env
+.env_dev
+dist
+package-lock.json
+yarn-error.log

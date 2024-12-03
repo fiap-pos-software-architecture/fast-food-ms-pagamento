@@ -1,0 +1,50 @@
+version: '3.9'
+
+services:
+
+# Setup MYSQL container
+  mysql_pagamento:
+    image: mysql:8.0
+    container_name: mysql-db-pagamento
+    restart: always
+    env_file: ./.env
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql-data_pagamento:/var/lib/mysql
+    networks:
+      - backend
+
+# Setup app container
+  app_pagamento:
+    build:
+     context: .
+     dockerfile: Dockerfile
+    #build: ./app
+    container_name: app-node-18_pagamento
+    restart: always
+    depends_on:
+      - mysql_pagamento
+    env_file: ./.env
+    ports:
+      - "${APP_PORT}:3001"
+    environment:
+      DB_HOST: mysql_pagamento
+      DB_USER: ${MYSQL_USER}
+      DB_PASSWORD: ${MYSQL_PASSWORD}
+      DB_NAME: ${MYSQL_DATABASE}
+      URL_CLIENTES: ${URL_CLIENTES}
+      URL_PRODUTOS: ${URL_PRODUTOS}
+    networks:
+      - backend
+
+volumes:
+  mysql-data_pagamento:
+networks:
+  backend:
+    external: true
