@@ -5,8 +5,9 @@ import { toOrder } from '../mapper/order.mapper';
 import { CreateOrderDto, UpdateOrderDto } from './dto/OrderDto';
 import axios from 'axios';
 
-const URL_CLIENTES = process.env.URL_CLIENTES
-const URL_PRODUTOS = process.env.URL_PRODUTOS
+const URL_CLIENTES: string = process.env.URL_CLIENTES ? process.env.URL_CLIENTES : ''
+
+const URL_PRODUTOS: string = process.env.URL_PRODUTOS ? process.env.URL_PRODUTOS : '';
 
 @Route('orders')
 @Tags('Order')
