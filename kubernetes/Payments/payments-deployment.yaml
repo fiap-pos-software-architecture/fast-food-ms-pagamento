@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: payments
-        image: jennyffernm/app-node-18:latest
+        image: salomaopolegar/microsservico_pagamento
         ports:
         - containerPort: 3000
         envFrom:
