@@ -20,7 +20,8 @@
     "docker:up": "rimraf dist && docker-compose up -d",
     "docker:down": "docker-compose down",
     "test": "jest",
-    "coverage": "jest --coverage"
+    "coverage": "jest --coverage",
+    "sonar": "sonar-scanner -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN -Dsonar.projectKey=fiap-pos-software-architecture_fast-food-ms-pagamento -Dsonar.organization=fiap-pos-software-architecture"
   },
   "dependencies": {
     "@types/joi": "^17.2.3",
