@@ -97,19 +97,21 @@ Os diagramas foram desenhados seguindo os padrões explicados na aula e utilizan
 
 1. Clone este repositório para sua máquina local.
    ```bash
-   git clone https://github.com/jennyffermorais/RESTfull-API-hexagonal-architecture.git
-   cd RESTfull-API-hexagonal-architecture
+   git clone https://github.com/fiap-pos-software-architecture/fast-food-ms-clientes
+   cd fast-food-ms-clientes
    ```
 
 2. Configure as variáveis de ambiente. Crie um arquivo `.env` com as seguintes variáveis:
    ```env
-    MYSQL_ROOT_PASSWORD=mysql
-    MYSQL_PASSWORD=jm_password
-    MYSQL_DATABASE=tech_challenge_BD
-    MYSQL_USER=jm_user
-    MYSQL_HOST=mysql-db
-    MYSQL_PORT=3306
-    APP_PORT=3000
+    MYSQL_ROOT_PASSWORD=mysql_pagamento
+   MYSQL_PASSWORD=jm_password_pagamento
+   MYSQL_DATABASE=tech_challenge_BD_pagamento
+   MYSQL_USER=jm_user_pagamento
+   MYSQL_HOST=mysql-db-pagamento
+   MYSQL_PORT=3306
+   APP_PORT=3001
+   URL_CLIENTES=http://app:3000/customers/
+   URL_PRODUTOS=http://app:3000/products/
    ```
 
 3. Compile e construa a aplicação usando Docker.
@@ -118,18 +120,23 @@ Os diagramas foram desenhados seguindo os padrões explicados na aula e utilizan
    ```
 
 4. Acesse o Swagger para testar as APIs.
-   - O Swagger estará disponível em `http://localhost:3000/docs`.
+   - O Swagger estará disponível em `http://localhost:3001/docs`.
 
 #### Banco de Dados
 
 A aplicação está configurada para utilizar MySQL conforme especificado no arquivo `docker-compose.yml`.
 
+### Cobertura de Testes:
+![](test-coverage.png)
+
 ## :memo: Equipe 43
 
-- [Felipe Carmo](https://github.com/carmof)
 - [Guilherme de Lima](https://github.com/GuilhermeLimaSoares)
 - [Jennyffer de Morais](https://github.com/jennyffermorais)
 - [Paulo Pupo](https://github.com/devpupo)
+- Salomão Pôlegar
+- Sabrina Cristina da Silva
+
 
 &#xa0;
 
