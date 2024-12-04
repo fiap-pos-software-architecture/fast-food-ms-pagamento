@@ -479,7 +479,7 @@ describe('OrderController', () => {
         
         //     expect(mockBadRequestResponse).toHaveBeenCalledWith(400, { message: 'Produto não encontrado' });
         //     expect(mockInternalErrorResponse).not.toHaveBeenCalled();
-        // });
+        // }); 
 
         // it('should return 500 if service throws an error during creation', async () => {
         //     const createOrderDto = {
