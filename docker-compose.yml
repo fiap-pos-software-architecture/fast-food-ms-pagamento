@@ -14,7 +14,7 @@ services:
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     ports:
-      - "3307:3306"
+      - "3308:3306"
     volumes:
       - mysql-data_pagamento:/var/lib/mysql
     networks:
@@ -32,7 +32,7 @@ services:
       - mysql_pagamento
     env_file: ./.env
     ports:
-      - "${APP_PORT}:3001"
+      - "${APP_PORT}:3002"
     environment:
       DB_HOST: mysql_pagamento
       DB_USER: ${MYSQL_USER}

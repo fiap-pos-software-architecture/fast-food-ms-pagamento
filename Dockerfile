@@ -18,6 +18,6 @@ ENV MYSQL_USER=jm_user_pagamento \
     MYSQL_HOST=mysql-db-pagamento \
     MYSQL_PORT=3306
 
-EXPOSE 3001
+EXPOSE 3002
 
 CMD [ "npm", "start" ]

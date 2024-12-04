@@ -459,6 +459,99 @@ describe('OrderController', () => {
 
             expect(mockInternalErrorResponse).not.toHaveBeenCalledWith(500, { message: 'Internal server error' });
         });
+
+        // it('should return 400 if product is not found', async () => {
+        //     const createOrderDto = {
+        //         customerId: 1,
+        //         processStage: PROCESS_STATUS.RECEBIDO,
+        //         products: [{ productId: 1, quantity: 2, unitPrice: 50 }],
+        //         items: [{ productId: 1, quantity: 2, unitPrice: 50 }],
+        //         totalAmount: 100,
+
+        //     };
+        //     axiosMock.onGet(`${process.env.URL_CLIENTES}1`).reply(200, { id: 1 });
+        //     axiosMock.onGet(`${process.env.URL_PRODUTOS}999`).reply(404);
+        
+        //     const mockBadRequestResponse = jest.fn();
+        //     const mockInternalErrorResponse = jest.fn();
+        
+        //     await orderController.create(createOrderDto, mockBadRequestResponse);
+        
+        //     expect(mockBadRequestResponse).toHaveBeenCalledWith(400, { message: 'Produto não encontrado' });
+        //     expect(mockInternalErrorResponse).not.toHaveBeenCalled();
+        // });
+
+        // it('should return 500 if service throws an error during creation', async () => {
+        //     const createOrderDto = {
+        //         customerId: 1,
+        //         processStage: PROCESS_STATUS.RECEBIDO,
+        //         products: [{ productId: 1, quantity: 2, unitPrice: 50 }],
+        //         items: [{ productId: 1, quantity: 2, unitPrice: 50 }],
+        //         totalAmount: 100,
+
+        //     };
+        
+        //     when(orderServiceMock.create(anything(), anything())).thenReject(new Error('Service error'));
+        
+        //     const mockInternalErrorResponse = jest.fn();
+        
+        //     await orderController.create(createOrderDto, mockInternalErrorResponse);
+        
+        //     expect(mockInternalErrorResponse).toHaveBeenCalledWith(500, { message: 'Internal server error' });
+        // });
+
+        it('should return 404 if trying to update a non-existent order', async () => {
+            const orderId = 999;
+            const updateData = { processStage: PROCESS_STATUS['EM PREPARAÇÃO'] };
+            const updatedOrder = {
+                id: orderId, customerId: 1,
+
+                products: [{ productId: 1, quantity: 2, unitPrice: 50 }],
+                items: [{ productId: 1, quantity: 2, unitPrice: 50 }],
+                totalAmount: 100, ...updateData,
+                paymentStatus: PAYMENT_STATUS.PENDING, // Corrigido para usar o enum
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            };
+        
+            when(orderServiceMock.update(orderId, updateData)).thenResolve(null);
+        
+            const mockNotFoundResponse = jest.fn();
+        
+            await orderController.update(orderId.toString(), updatedOrder, mockNotFoundResponse, jest.fn());
+        
+            expect(mockNotFoundResponse).toHaveBeenCalledWith(404, { message: 'Order not found' });
+        });
+        
+        it('should return 400 if provided status is invalid', async () => {
+            const invalidStatus = 'INVALID_STATUS';
+        
+            const mockBadRequestResponse = jest.fn();
+        
+            await orderController.getOrdersByStatus(invalidStatus, mockBadRequestResponse, jest.fn());
+        
+            expect(mockBadRequestResponse).toHaveBeenCalledWith(400, { message: 'Invalid status' });
+        });
+        
+        // it('should return 400 if date range format is invalid', async () => {
+        //     const startDate = 'invalid-date';
+        //     const endDate = 'invalid-date';
+        
+        //     const mockBadRequestResponse = jest.fn();
+        
+        //     await orderController.getOrdersByUpdateDate(startDate, endDate, mockBadRequestResponse, jest.fn());
+        
+        //     expect(mockBadRequestResponse).toHaveBeenCalledWith(400, { message: 'Invalid date range format' });
+        // });
+
+        
+        
+        
+
+        
+
     });
+
+
 
 });

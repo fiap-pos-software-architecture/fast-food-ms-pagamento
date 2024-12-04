@@ -6,7 +6,6 @@ import { CreateOrderDto, UpdateOrderDto } from './dto/OrderDto';
 import axios from 'axios';
 
 const URL_CLIENTES: string = process.env.URL_CLIENTES ? process.env.URL_CLIENTES : ''
-
 const URL_PRODUTOS: string = process.env.URL_PRODUTOS ? process.env.URL_PRODUTOS : '';
 
 @Route('orders')
@@ -27,21 +26,11 @@ export class OrderController {
       const { order, products } = toOrder(createOrderDto);
 
       try {
-        await axios.get(URL_CLIENTES + order.customerId);
+        await axios.get(URL_CLIENTES + order.customerId)
       } catch {
         return internalErrorResponse(500, { message: 'Cliente não cadastrado' })
-      }
-
-      for (const produto of products) {
-        const retorno = await axios.get(URL_PRODUTOS + produto.productId)
-
-        if (retorno.data == null) {
-          return internalErrorResponse(500, { message: 'Produto não cadastrado' });
-        }
-      }
-
-
-      return await this.orderService.create(order, products);
+      }    
+      
     } catch (error) {
 
       return internalErrorResponse(500, { message: 'Internal server error' });
@@ -106,7 +95,7 @@ export class OrderController {
   ): Promise<any> {
     try {
       const orders = await this.orderService.getAll({ processStage });
-      return orders;
+      
     } catch (error) {
       return internalErrorResponse(500, { message: 'Internal server error' });
     }
